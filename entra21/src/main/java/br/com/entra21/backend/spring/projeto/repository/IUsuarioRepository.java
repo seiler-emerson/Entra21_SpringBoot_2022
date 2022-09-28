@@ -23,4 +23,8 @@ public interface IUsuarioRepository extends JpaRepository<Usuario, Integer> {
 	
 	//Tudo isso é substituido por uma busca que traz exatamente os dados que eu preciso
 	
+	@Query("from Usuario where email = :emailParam and senha = :senhaParam")
+	Usuario login(@Param("emailParam")String email, @Param("senhaParam")String senha);
+	
+	
 }

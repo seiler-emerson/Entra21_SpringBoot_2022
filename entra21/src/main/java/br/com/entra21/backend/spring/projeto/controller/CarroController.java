@@ -11,26 +11,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.entra21.backend.spring.projeto.model.Usuario;
-import br.com.entra21.backend.spring.projeto.repository.IUsuarioRepository;
+import br.com.entra21.backend.spring.projeto.model.Carro;
+import br.com.entra21.backend.spring.projeto.repository.ICarroRepository;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/usuarios")
-public class UsuarioController {
+@RequestMapping("/carros")
+public class CarroController {
 
 	@Autowired
-	IUsuarioRepository usuarioRepository;
-
-	@GetMapping("/maior_que/{idade}")
-	private List<Usuario> maiorQue(@PathVariable("idade") Integer idade){
-		 
-		 return usuarioRepository.maiorIdade(idade);
-	 }
+	ICarroRepository carroRepository;
 	
-	@PostMapping("/login")
-	public Usuario login(@RequestBody Usuario credencial) {
+	@GetMapping("/buscarCor/{cor}")
+	private List<Carro> buscarCor(@PathVariable("cor") String cor) {
 		
-		return usuarioRepository.login(credencial.getEmail(), credencial.getSenha());
+		return carroRepository.qualCor(cor);
+	}
+	
+	@PostMapping("/velocidadeMaxima")
+	public Carro velocidade(@RequestBody Carro velocidade) {
+		
+		return carroRepository.velocidade(velocidade.getVelocidade_maxima());
 	}
 }
